@@ -10,7 +10,7 @@
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at top,#24624a 0%,#123f30 55%,#082b21 100%);color:var(--cream);font-family:Georgia,'Times New Roman',serif}
 .card{width:min(100%,520px);border:1px solid rgba(217,181,101,.5);border-radius:30px;background:rgba(28,79,59,.78);box-shadow:0 25px 60px rgba(0,0,0,.22);padding:38px 28px 30px;text-align:center}
 .kicker{color:var(--gold2);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:22px}.title{font-size:clamp(38px,8vw,52px);line-height:1.04;font-weight:normal;margin:0}.icons{font-family:system-ui;font-size:35px;margin:22px 0}.intro{font-size:17px;line-height:1.55;margin:0 0 26px}.rule{height:1px;background:linear-gradient(90deg,transparent,rgba(217,181,101,.35),transparent);margin:24px 0}
-label{display:block;text-align:left;color:var(--gold2);margin:16px 0 8px;font-size:16px}select{width:100%;padding:15px 14px;border-radius:14px;border:1px solid var(--gold);background:var(--cream);color:#173a2d;font-size:16px}button{margin-top:22px;width:100%;padding:17px 16px;border:0;border-radius:15px;background:linear-gradient(120deg,var(--gold2),#c99e4b);color:#123629;font-weight:bold;font-size:17px;font-family:Georgia,serif;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.12)}button:disabled{opacity:.5;cursor:not-allowed}.hint{min-height:26px;margin-top:15px;color:#ffe0a1;font-size:15px}.result{display:none;margin-top:20px;padding:22px 16px;border:1px solid rgba(239,207,134,.55);border-radius:18px;background:rgba(6,40,29,.45);animation:fade .45s ease}.result.show{display:block}.result .small{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2)}.recipient{font-size:32px;margin:10px 0 4px;color:#fff1cf}.message{font-size:15px;line-height:1.5}.footer{font-size:12px;margin-top:26px;color:#f0d9ad}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+label{display:block;text-align:left;color:var(--gold2);margin:16px 0 8px;font-size:16px}select,input{width:100%;padding:15px 14px;border-radius:14px;border:1px solid var(--gold);background:var(--cream);color:#173a2d;font-size:16px}button{margin-top:22px;width:100%;padding:17px 16px;border:0;border-radius:15px;background:linear-gradient(120deg,var(--gold2),#c99e4b);color:#123629;font-weight:bold;font-size:17px;font-family:Georgia,serif;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.12)}button:disabled{opacity:.5;cursor:not-allowed}.hint{min-height:26px;margin-top:15px;color:#ffe0a1;font-size:15px}.result{display:none;margin-top:20px;padding:22px 16px;border:1px solid rgba(239,207,134,.55);border-radius:18px;background:rgba(6,40,29,.45);animation:fade .45s ease}.result.show{display:block}.result .small{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2)}.recipient{font-size:32px;margin:10px 0 4px;color:#fff1cf}.message{font-size:15px;line-height:1.5}.footer{font-size:12px;margin-top:26px;color:#f0d9ad}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:480px){body{padding:14px}.card{padding:30px 20px 24px;border-radius:24px}.intro{font-size:16px}}
 </style>
 </head>
@@ -23,31 +23,29 @@ label{display:block;text-align:left;color:var(--gold2);margin:16px 0 8px;font-si
   <div class="rule"></div>
   <label for="name">Je suis…</label>
   <select id="name"><option value="">Choisir mon prénom</option></select>
+  <label for="code">Mon code secret</label>
+  <input id="code" type="text" autocomplete="off" placeholder="Saisir mon code" maxlength="6">
   <button id="reveal" disabled>Qui vais-je gâter cette année ?</button>
-  <div class="hint" id="hint" role="status">Choisis ton prénom pour découvrir ton destinataire.</div>
+  <div class="hint" id="hint" role="status">Choisis ton prénom et saisis ton code.</div>
   <section class="result" id="result" aria-live="polite"><div class="small">Cette année, tu vas gâter…</div><div class="recipient" id="recipient"></div><div class="message">🎁 Chut… c'est un secret !<br>Garde cette surprise précieusement jusqu'à Noël.</div></section>
   <div class="footer">Tirage familial · Un destinataire unique pour chacun</div>
 </main>
 <script>
-// Tirage fixe de 10 personnes : chacun offre et reçoit exactement un cadeau.
-// Cette version est volontairement simple pour une utilisation familiale ponctuelle.
 const assignments = {
-  "Papa":"Sibylle",
-  "Maman":"Henri",
-  "Baudouin":"Jacinthe",
-  "Cyriaque":"Papa",
-  "Amaury":"Maman",
-  "Foucauld":"Sixtine",
-  "Sixtine":"Baudouin",
-  "Sibylle":"Amaury",
-  "Jacinthe":"Foucauld",
-  "Henri":"Cyriaque"
+  "Papa":"Sibylle","Maman":"Henri","Baudouin":"Jacinthe","Cyriaque":"Papa",
+  "Amaury":"Maman","Foucauld":"Sixtine","Sixtine":"Baudouin","Sibylle":"Eugénie",
+  "Jacinthe":"Foucauld","Henri":"Cyriaque","Eugénie":"Amaury"
 };
-const names=Object.keys(assignments), select=document.getElementById('name'), btn=document.getElementById('reveal'), hint=document.getElementById('hint'), result=document.getElementById('result'), recipient=document.getElementById('recipient');
-names.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;select.appendChild(o)});
-function restore(){const n=select.value;btn.disabled=!n;result.classList.remove('show');recipient.textContent='';hint.textContent=n?'Prêt à découvrir ton secret ?':'Choisis ton prénom pour découvrir ton destinataire.';if(n){const saved=localStorage.getItem('secret-noel-2026-'+n);if(saved){recipient.textContent=saved;result.classList.add('show');hint.textContent='Ton secret a déjà été révélé sur cet appareil.';}}}
-select.addEventListener('change',restore);
-btn.addEventListener('click',()=>{const n=select.value;if(!n)return;const r=assignments[n];localStorage.setItem('secret-noel-2026-'+n,r);recipient.textContent=r;result.classList.add('show');hint.textContent='';btn.disabled=true;});
+const codes = {
+  "Papa":"BL2G9S","Maman":"PKLNLU","Baudouin":"DHFBDD","Cyriaque":"ZC94G8",
+  "Amaury":"MP2LZ0","Foucauld":"9BGBKO","Sixtine":"43G0CM","Sibylle":"LSU1S8",
+  "Jacinthe":"VVH12G","Henri":"P84CMR","Eugénie":"AK1QIH"
+};
+const select=document.getElementById('name'), codeInput=document.getElementById('code'), btn=document.getElementById('reveal'), hint=document.getElementById('hint'), result=document.getElementById('result'), recipient=document.getElementById('recipient');
+Object.keys(assignments).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;select.appendChild(o)});
+function restore(){const n=select.value;result.classList.remove('show');recipient.textContent='';btn.disabled=!(n && codeInput.value.trim());hint.textContent=n?'Saisis ton code secret pour découvrir ton destinataire.':'Choisis ton prénom et saisis ton code.';}
+select.addEventListener('change',restore);codeInput.addEventListener('input',restore);
+btn.addEventListener('click',()=>{const n=select.value, c=codeInput.value.trim().toUpperCase();if(!n)return;if(c!==codes[n]){hint.textContent='Code incorrect. Vérifie ton code et réessaie.';result.classList.remove('show');recipient.textContent='';return;}recipient.textContent=assignments[n];result.classList.add('show');hint.textContent='';btn.disabled=true;});
 restore();
 </script>
 </body>
