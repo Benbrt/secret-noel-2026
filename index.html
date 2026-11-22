@@ -1,4 +1,54 @@
-<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Le Secret de Noël 2026</title><style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:20px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at top,#285c43,#123c2e 68%,#0a241b);color:#f6f0e5;font-family:Georgia,serif}main{width:min(100%,460px);border:1px solid #d6b36b66;border-radius:25px;padding:30px 24px;text-align:center;background:#ffffff0b;box-shadow:0 22px 70px #0005}.top{color:#d6b36b;font-size:12px;letter-spacing:.17em}h1{font-weight:normal;font-size:38px;line-height:1.1;margin:18px 0}.orn{font-size:32px;margin:18px}p{line-height:1.55;color:#e9ddc5}.rule{height:1px;background:linear-gradient(90deg,transparent,#d6b36b,transparent);margin:24px 0}label{display:block;text-align:left;color:#d6b36b;margin:12px 0 7px}select,input{width:100%;padding:14px;border-radius:12px;border:1px solid #c9a45d88;background:#f7f1e7;color:#17352a;font-size:16px}button{margin-top:20px;width:100%;border:0;border-radius:14px;background:linear-gradient(135deg,#e5c47e,#c99b49);color:#143628;font-weight:bold;font-family:inherit;font-size:17px;padding:17px;cursor:pointer}#result{display:none;margin-top:22px;border:1px solid #d9b56d88;border-radius:18px;padding:24px;background:#ffffff0a}.small{font-size:12px;color:#d6b36b;letter-spacing:.15em}.recipient{font-size:34px;color:#f3d68e;margin:14px}.error{color:#ffd1c4;margin-top:12px;display:none}.foot{font-size:12px;color:#c9bca5;margin-top:22px}</style><main><div class="top">✦ Noël en famille · 2026 ✦</div><h1>Le Secret<br>de Noël</h1><div class="orn">🎄 ✨ 🎁</div><p>Un cadeau, une attention, un secret.<br>Découvre la personne que tu vas gâter.</p><div class="rule"></div><label>Je suis…</label><select id="person"><option value="">Choisir mon prénom</option></select><label>Mon code secret</label><input id="code" maxlength="12" placeholder="Saisir mon code"><button id="draw">Qui vais-je gâter cette année ?</button><div id="error" class="error"></div><section id="result"><div class="small">Ton secret de Noël</div><div class="recipient" id="recipient"></div><p>Chut… c'est un secret ! 🤫</p></section><div class="foot">Tirage familial · Un destinataire unique pour chacun</div></main><script>
-const data={"Papa": {"recipient": "Henri", "code": "BL2G9S"}, "Maman": {"recipient": "Sibylle", "code": "PKLNLU"}, "Baudouin": {"recipient": "Foucauld", "code": "DHFBDD"}, "Cyriaque": {"recipient": "Jacinthe", "code": "ZC94G8"}, "Amaury": {"recipient": "Cyriaque", "code": "MP2LZ0"}, "Foucauld": {"recipient": "Papa", "code": "9BGBKO"}, "Sixtine": {"recipient": "Amaury", "code": "43G0CM"}, "Sibylle": {"recipient": "Baudouin", "code": "LSU1S8"}, "Jacinthe": {"recipient": "Maman", "code": "VVH12G"}, "Henri": {"recipient": "Sixtine", "code": "P84CMR"}};const s=document.getElementById('person'),b=document.getElementById('draw');Object.keys(data).forEach(p=>{let o=document.createElement('option');o.value=p;o.textContent=p;s.append(o)});b.onclick=()=>{let p=s.value,c=document.getElementById('code').value.trim().toUpperCase(),e=document.getElementById('error');e.style.display='none';document.getElementById('result').style.display='none';if(!p||!c){e.textContent='Choisis ton prénom et saisis ton code.';e.style.display='block';return}if(data[p].code!==c){e.textContent='Code incorrect. Vérifie ton message personnel.';e.style.display='block';return}document.getElementById('recipient').textContent=data[p].recipient;document.getElementById('result').style.display='block';s.disabled=true;document.getElementById('code').disabled=true;b.disabled=true;b.textContent='Secret dévoilé 🎁'};
-</script></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123f30">
+<title>Le Secret de Noël · 2026</title>
+<style>
+:root{--green:#123f30;--green2:#205744;--gold:#d9b565;--gold2:#efcf86;--cream:#f6efe2;--white:#fff7e9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at top,#24624a 0%,#123f30 55%,#082b21 100%);color:var(--cream);font-family:Georgia,'Times New Roman',serif}
+.card{width:min(100%,520px);border:1px solid rgba(217,181,101,.5);border-radius:30px;background:rgba(28,79,59,.78);box-shadow:0 25px 60px rgba(0,0,0,.22);padding:38px 28px 30px;text-align:center}
+.kicker{color:var(--gold2);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:22px}.title{font-size:clamp(38px,8vw,52px);line-height:1.04;font-weight:normal;margin:0}.icons{font-family:system-ui;font-size:35px;margin:22px 0}.intro{font-size:17px;line-height:1.55;margin:0 0 26px}.rule{height:1px;background:linear-gradient(90deg,transparent,rgba(217,181,101,.35),transparent);margin:24px 0}
+label{display:block;text-align:left;color:var(--gold2);margin:16px 0 8px;font-size:16px}select{width:100%;padding:15px 14px;border-radius:14px;border:1px solid var(--gold);background:var(--cream);color:#173a2d;font-size:16px}button{margin-top:22px;width:100%;padding:17px 16px;border:0;border-radius:15px;background:linear-gradient(120deg,var(--gold2),#c99e4b);color:#123629;font-weight:bold;font-size:17px;font-family:Georgia,serif;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.12)}button:disabled{opacity:.5;cursor:not-allowed}.hint{min-height:26px;margin-top:15px;color:#ffe0a1;font-size:15px}.result{display:none;margin-top:20px;padding:22px 16px;border:1px solid rgba(239,207,134,.55);border-radius:18px;background:rgba(6,40,29,.45);animation:fade .45s ease}.result.show{display:block}.result .small{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2)}.recipient{font-size:32px;margin:10px 0 4px;color:#fff1cf}.message{font-size:15px;line-height:1.5}.footer{font-size:12px;margin-top:26px;color:#f0d9ad}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:480px){body{padding:14px}.card{padding:30px 20px 24px;border-radius:24px}.intro{font-size:16px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="kicker">✦ Noël en famille · 2026 ✦</div>
+  <h1 class="title">Le Secret<br>de Noël</h1>
+  <div class="icons" aria-hidden="true">🎄 ✨ 🎁</div>
+  <p class="intro">Un cadeau, une attention, un secret.<br>Découvre la personne que tu vas gâter.</p>
+  <div class="rule"></div>
+  <label for="name">Je suis…</label>
+  <select id="name"><option value="">Choisir mon prénom</option></select>
+  <button id="reveal" disabled>Qui vais-je gâter cette année ?</button>
+  <div class="hint" id="hint" role="status">Choisis ton prénom pour découvrir ton destinataire.</div>
+  <section class="result" id="result" aria-live="polite"><div class="small">Cette année, tu vas gâter…</div><div class="recipient" id="recipient"></div><div class="message">🎁 Chut… c'est un secret !<br>Garde cette surprise précieusement jusqu'à Noël.</div></section>
+  <div class="footer">Tirage familial · Un destinataire unique pour chacun</div>
+</main>
+<script>
+// Tirage fixe de 10 personnes : chacun offre et reçoit exactement un cadeau.
+// Cette version est volontairement simple pour une utilisation familiale ponctuelle.
+const assignments = {
+  "Papa":"Sibylle",
+  "Maman":"Henri",
+  "Baudouin":"Jacinthe",
+  "Cyriaque":"Papa",
+  "Amaury":"Maman",
+  "Foucauld":"Sixtine",
+  "Sixtine":"Baudouin",
+  "Sibylle":"Amaury",
+  "Jacinthe":"Foucauld",
+  "Henri":"Cyriaque"
+};
+const names=Object.keys(assignments), select=document.getElementById('name'), btn=document.getElementById('reveal'), hint=document.getElementById('hint'), result=document.getElementById('result'), recipient=document.getElementById('recipient');
+names.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;select.appendChild(o)});
+function restore(){const n=select.value;btn.disabled=!n;result.classList.remove('show');recipient.textContent='';hint.textContent=n?'Prêt à découvrir ton secret ?':'Choisis ton prénom pour découvrir ton destinataire.';if(n){const saved=localStorage.getItem('secret-noel-2026-'+n);if(saved){recipient.textContent=saved;result.classList.add('show');hint.textContent='Ton secret a déjà été révélé sur cet appareil.';}}}
+select.addEventListener('change',restore);
+btn.addEventListener('click',()=>{const n=select.value;if(!n)return;const r=assignments[n];localStorage.setItem('secret-noel-2026-'+n,r);recipient.textContent=r;result.classList.add('show');hint.textContent='';btn.disabled=true;});
+restore();
+</script>
+</body>
+</html>
